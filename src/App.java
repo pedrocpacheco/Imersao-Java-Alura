@@ -16,11 +16,10 @@ public class App {
         String dadosAPI = buscarDadosApi();
 
         // extrair so os dados que interessam (titulo, poster, nota)
-        JsonParser parser = new JsonParser();
-        List<Map<String, String>> listaDeFilmes = parser.parse(dadosAPI);
+        List<Map<String, String>> listaFiltrada = filtrarLista(dadosAPI);
 
         // exibir os dados
-        for (Map<String,String> filme : listaDeFilmes) {
+        for (Map<String,String> filme : listaFiltrada) {
             System.out.println(filme.get("title"));
             System.out.println(filme.get("image"));
             System.out.println(filme.get("imDbRating"));
@@ -36,7 +35,14 @@ public class App {
             HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
             String body = response.body();
             return body;
+    }
+
+    public static List<Map<String, String>> filtrarLista(String dadosAPI){
+        JsonParser parser = new JsonParser();
+        List<Map<String, String>> listaDeFilmes = parser.parse(dadosAPI);
+        return listaDeFilmes;
+        
+    }
 
 
-}
 }
