@@ -6,6 +6,7 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 
 public class App {
@@ -28,7 +29,10 @@ public class App {
     }
 
     public static String buscarDadosApi() throws IOException, InterruptedException{
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+        Scanner cc = new Scanner(System.in);
+        System.out.println("Digite a URL da API que você deseja importar:");
+        String url = cc.nextLine();
+        cc.close();
             URI endereco = URI.create(url);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder(endereco).GET().build();
