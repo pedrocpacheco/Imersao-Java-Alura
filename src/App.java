@@ -1,3 +1,5 @@
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
@@ -14,8 +16,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-
 
 
 public class App {
@@ -44,17 +44,25 @@ public class App {
             }
             //Pulando Linha
             System.out.println("\n");
-            String urlImagem = filme.get("image");
-            URL urlImagemURL =  new URL(urlImagem);
-            BufferedImage imagem = ImageIO.read(urlImagemURL);
-            JLabel label = new JLabel(new ImageIcon(imagem));
-            JFrame frame = new JFrame();
-            frame.add(label);
-            frame.pack();
-            frame.setVisible(true);
-        }
+            
+            //------------------------------------------------------
+            // Metodo de Imagem para Ascii 
+            System.out.println(imageParaAscii(filme.get("image")));
+            //------------------------------------------------------
 
+            // Opção com Janela de Imagem:
+            // String urlImagem = filme.get("image");
+            // URL urlImagemURL =  new URL(urlImagem); // String para URL
+            // BufferedImage imagem = ImageIO.read(urlImagemURL);
+            // JLabel label = new JLabel(new ImageIcon(imagem));
+            // JFrame frame = new JFrame();
+            // frame.add(label);
+            // frame.pack();
+            // frame.setVisible(true);
+
+        }
     }
+
 
     public static String buscarDadosApi() throws IOException, InterruptedException{
         Scanner cc = new Scanner(System.in);
@@ -84,6 +92,45 @@ public class App {
         List<Map<String, String>> listaDeFilmes = parser.parse(dadosAPI);
         return listaDeFilmes;
         
+    }
+
+    // Metodo de Imagem Para Ascii
+    public static String imageParaAscii(String imagemFilme) throws IOException{
+        String urlImagem = imagemFilme;
+        URL urlImagemURL =  new URL(urlImagem); // String para URL
+        BufferedImage imagem = ImageIO.read(urlImagemURL); // Adicionando a Buffered Image
+
+        // Definindo largura e altura da imagem
+        int larguraPadrao = 100;
+        int alturaPadrao = 100;
+
+        // Passando a imagem para o tamanho desejado
+        BufferedImage imagemRedimensionada = new BufferedImage(larguraPadrao, alturaPadrao, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = imagemRedimensionada.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.drawImage(imagem, 0, 0, larguraPadrao, alturaPadrao, null);
+        g.dispose();
+
+        // Passando os caracteres que desejo
+        String caracteres = "@#S%?*+;:,. ";
+
+        StringBuilder resultado = new StringBuilder();
+        for (int y = 0; y < alturaPadrao; y++) {
+            for (int x = 0; x < larguraPadrao; x++) {
+                int cor = imagemRedimensionada.getRGB(x, y);
+                int r = (cor >> 16) & 0xff;
+                int l = (cor >> 8) & 0xff;
+                int b = cor & 0xff;
+                int brilho = (int) (0.2126 * r + 0.7152 * l + 0.0722 * b);
+                int indiceCaractere = (int) (brilho / 255.0 * (caracteres.length() - 1));
+                char caractere = caracteres.charAt(indiceCaractere);
+                resultado.append(caractere);
+            }
+            resultado.append("\n");
+        }
+
+    // Exibe o ASCII final no Terminal
+    return resultado.toString();
     }
 
 
