@@ -11,7 +11,6 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,6 +23,13 @@ public class App {
 
         // Fazer uma conexão http e os buscar os top 250 filmes
         String dadosAPI = buscarDadosApi();
+
+        // Escolhendo metodo de Vizualização de Imagem
+        Scanner cc = new Scanner(System.in);
+        System.out.println("Como você deseja vizualizar as imagens dos filmes/series?");
+        System.out.println("1- ASCII | 2- JFRAME");
+        int opcaoVizualicao = cc.nextInt();
+        cc.close();
 
         // extrair so os dados que interessam (titulo, poster, nota)
         List<Map<String, String>> listaFiltrada = filtrarLista(dadosAPI);
@@ -46,19 +52,23 @@ public class App {
             System.out.println("\n");
             
             //------------------------------------------------------
-            // Metodo de Imagem para Ascii 
-            System.out.println(imageParaAscii(filme.get("image")));
-            //------------------------------------------------------
-
-            // Opção com Janela de Imagem:
-            // String urlImagem = filme.get("image");
-            // URL urlImagemURL =  new URL(urlImagem); // String para URL
-            // BufferedImage imagem = ImageIO.read(urlImagemURL);
-            // JLabel label = new JLabel(new ImageIcon(imagem));
-            // JFrame frame = new JFrame();
-            // frame.add(label);
-            // frame.pack();
-            // frame.setVisible(true);
+            // Forma de Vizualiar imagem referente a escolha
+            if(opcaoVizualicao == 1){
+                // Opcao de ASCII
+                System.out.println(imageParaAscii(filme.get("image")));
+            } else if(opcaoVizualicao == 2){
+                // Opcao de JFRAME
+                String urlImagem = filme.get("image");
+                URL urlImagemURL =  new URL(urlImagem); // String para URL
+                BufferedImage imagem = ImageIO.read(urlImagemURL);
+                JLabel label = new JLabel(new ImageIcon(imagem));
+                JFrame frame = new JFrame();
+                frame.add(label);
+                frame.pack();
+                frame.setVisible(true);
+            }  else{
+                throw new RuntimeException("Opcao de Vizualicao de Imagem Inexistente");
+            }
 
         }
     }
@@ -69,7 +79,6 @@ public class App {
         System.out.println("De qual API você deseja importar os dados? ");
         System.out.println("1- Filmes | 2- Séries");
         int opcao = cc.nextInt();
-        cc.close();
         String url;
         if(opcao == 1){
             url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopTVs.json";
@@ -132,6 +141,4 @@ public class App {
     // Exibe o ASCII final no Terminal
     return resultado.toString();
     }
-
-
 }
