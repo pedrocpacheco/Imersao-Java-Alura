@@ -2,9 +2,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -14,7 +16,7 @@ public class GeradorStickers {
   public GeradorStickers() {
   }
 
-  public void criar(String urlImagem, String nomeFilme, String fraseAdicionada) throws Exception{
+  public void criar(String urlImagem, String nomeFilme, String fraseAdicionada, InputStream imagemAvaliacao) throws Exception{
 
     // Passando a imagem para URL
     URL urlImagemURL =  new URL(urlImagem);
@@ -32,6 +34,8 @@ public class GeradorStickers {
     Graphics2D graphics = (Graphics2D) novaImagem.getGraphics();
     graphics.drawImage(imagemOriginal, 0, 0, null);
     
+    // Criando sobreposicao
+    BufferedImage imagemSobreposicao = ImageIO.read(imagemAvaliacao);
     // Escrever frase na imagem
     // Configurando fonta
     var fonte = new Font("impact", Font.BOLD, 100);
@@ -46,16 +50,18 @@ public class GeradorStickers {
     int posicaoTexto = (largaura - larguraTexto) / 2;
 
     graphics.drawString(texto, posicaoTexto, novaAltura - 100);
+    graphics.drawImage(imagemSobreposicao,  0, novaAltura - imagemSobreposicao.getHeight(), null);
 
     // Escrever em arquivo
+    nomeFilme = nomeFilme.replaceAll(":", "");
     ImageIO.write(novaImagem, "png", new File("saida/" + nomeFilme + ".png"));
 
   }
   
-  public static void main(String[] args) throws Exception {
-    GeradorStickers geradorStickers = new GeradorStickers();
-    geradorStickers.criar("https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopTVs_2.jpg", "BreakingBad",  "SEXO!");
-  }
+ // public static void main(String[] args) throws Exception {
+    //GeradorStickers geradorStickers = new GeradorStickers();
+    // geradorStickers.criar("https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopTVs_2.jpg", "BreakingBad",  "SEXO!");
+ //}
 
 
 }

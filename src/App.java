@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -48,12 +51,15 @@ public class App {
             } else if (opcaoVizualicao == 3){
                 //OBJETO e METODO de Stickers
                 GeradorStickers geradorStickers = new GeradorStickers();
-                if(notaEmDouble >= 8.5){
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "MASTERPIECE");
-                } else if(notaEmDouble <= 8.5 && notaEmDouble >= 6.5){
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "BOM CONTEUDO");
+                if(notaEmDouble >= 8.7){
+                    InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/masterpeca.png"));
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "MASTERPIECE", imagemAvaliacao);
+                } else if(notaEmDouble <= 8.7 && notaEmDouble >= 7.5){
+                    InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/bom.png"));
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "BOM CONTEUDO", imagemAvaliacao);
                 } else{
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "UMA MERDA");
+                    InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/ruim.png"));
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "UMA MERDA", imagemAvaliacao);
                 }
             } else{
                 throw new RuntimeException("Opção Inexistente");
