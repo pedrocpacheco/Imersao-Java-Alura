@@ -34,7 +34,7 @@ public class App {
             // METODO Imprirmir Estrelas
             double notaEmDouble = Double.parseDouble(filme.get("imDbRating"));
             imprimirEstrelas(notaEmDouble);
-            
+
             // OPÇÕES de Vizualização
             if(opcaoVizualicao == 1){
                 //OBJETO e METODO de ASCII
@@ -48,7 +48,13 @@ public class App {
             } else if (opcaoVizualicao == 3){
                 //OBJETO e METODO de Stickers
                 GeradorStickers geradorStickers = new GeradorStickers();
-                geradorStickers.criar(filme.get("image"), filme.get("title"), "Outra ATT");
+                if(notaEmDouble >= 8.5){
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "MASTERPIECE");
+                } else if(notaEmDouble <= 8.5 && notaEmDouble >= 6.5){
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "BOM CONTEUDO");
+                } else{
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "UMA MERDA");
+                }
             } else{
                 throw new RuntimeException("Opção Inexistente");
             }
