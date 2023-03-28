@@ -27,7 +27,7 @@ public class App {
         // Escolhendo metodo de Vizualização de Imagem
         Scanner cc = new Scanner(System.in);
         System.out.println("Como você deseja vizualizar as imagens dos filmes/series?");
-        System.out.println("1- ASCII | 2- JFRAME");
+        System.out.println("1- ASCII | 2- JFRAME | 3- Figurinhas");
         int opcaoVizualicao = cc.nextInt();
         cc.close();
 
@@ -66,7 +66,11 @@ public class App {
                 frame.add(label);
                 frame.pack();
                 frame.setVisible(true);
-            }  else{
+            }  else if(opcaoVizualicao == 3){ 
+                GeradorStickers geradorStickers = new GeradorStickers();
+                geradorStickers.criar(filme.get("image"), filme.get("title"), "FIZ COM API");
+            }
+            else {
                 throw new RuntimeException("Opcao de Vizualicao de Imagem Inexistente");
             }
 
