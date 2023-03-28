@@ -77,7 +77,7 @@ public class App {
     public static String buscarDadosApi() throws IOException, InterruptedException{
         Scanner cc = new Scanner(System.in);
         System.out.println("De qual API você deseja importar os dados? ");
-        System.out.println("1- Filmes | 2- Séries");
+        System.out.println("1- Séries | 2- Filmes");
         int opcao = cc.nextInt();
         String url;
         if(opcao == 1){
