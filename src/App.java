@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -53,13 +54,16 @@ public class App {
                 GeradorStickers geradorStickers = new GeradorStickers();
                 if(notaEmDouble >= 9){
                     InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/masterpeca.png"));
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "MASTERPIECE", imagemAvaliacao);
+                    InputStream imagemPedro = new FileInputStream(new File("sobreposicao/aprovado.png"));
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "MASTERPIECE", imagemAvaliacao, imagemPedro, Color.GREEN);
                 } else if(notaEmDouble <= 9 && notaEmDouble >= 8.7){
                     InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/bom.png"));
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "BOM CONTEUDO", imagemAvaliacao);
+                    InputStream imagemPedro = new FileInputStream(new File("sobreposicao/naMedia.png"));
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "BOM CONTEUDO", imagemAvaliacao, imagemPedro, Color.BLUE);
                 } else{
                     InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/ruim.png"));
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "UMA MERDA", imagemAvaliacao);
+                    InputStream imagemPedro = new FileInputStream(new File("sobreposicao/umCoco.jpg"));
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "UMA MERDA", imagemAvaliacao, imagemPedro, Color.RED);
                 }
             } else{
                 throw new RuntimeException("Opção Inexistente");

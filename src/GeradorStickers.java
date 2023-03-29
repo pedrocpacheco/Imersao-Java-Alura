@@ -1,9 +1,14 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
@@ -15,7 +20,7 @@ public class GeradorStickers {
   public GeradorStickers() {
   }
 
-  public void criar(String urlImagem, String nomeFilme, String fraseAdicionada, InputStream imagemAvaliacao) throws Exception{
+  public void criar(String urlImagem, String nomeFilme, String fraseAdicionada, InputStream imagemAvaliacao, InputStream imagemPedro, Color cor) throws Exception{
 
     // Passando a imagem para URL
     URL urlImagemURL =  new URL(urlImagem);
@@ -35,10 +40,11 @@ public class GeradorStickers {
     
     // Criando sobreposicao
     BufferedImage imagemSobreposicao = ImageIO.read(imagemAvaliacao);
+    BufferedImage imagemNotaPedro = ImageIO.read(imagemPedro);
     // Escrever frase na imagem
     // Configurando fonta
     var fonte = new Font("impact", Font.BOLD, 100);
-    graphics.setColor(Color.YELLOW);
+    graphics.setColor(cor);
     graphics.setFont(fonte);
 
     // Juntando imagem e texto
@@ -50,12 +56,31 @@ public class GeradorStickers {
 
     graphics.drawString(texto, posicaoTexto, novaAltura - 100);
     graphics.drawImage(imagemSobreposicao,  0, novaAltura - imagemSobreposicao.getHeight(), null);
+    graphics.drawImage(imagemNotaPedro,  imagemOriginal.getWidth() - imagemNotaPedro.getWidth(), novaAltura - imagemSobreposicao.getHeight(), null);
+
+
+    // Fazendo Outline
+    FontRenderContext fontRendererContext = graphics.getFontRenderContext();
+    var textLayout = new TextLayout(texto, fonte, fontRendererContext);
+
+    Shape outline = textLayout.getOutline(null);
+    AffineTransform transform = graphics.getTransform();
+    transform.translate(posicaoTexto, novaAltura - 100);
+    graphics.setTransform(transform);
+
+    BasicStroke outlineStroke = new BasicStroke(largaura * 0.004f);
+    graphics.setStroke(outlineStroke);
+
+    graphics.setColor(Color.BLACK);
+    graphics.draw(outline);
+    graphics.setClip(outline);
 
     // Escrever em arquivo
     nomeFilme = nomeFilme.replaceAll(":", "");
     ImageIO.write(novaImagem, "png", new File("saida/" + nomeFilme + ".png"));
 
   }
+
   
  // public static void main(String[] args) throws Exception {
     //GeradorStickers geradorStickers = new GeradorStickers();
