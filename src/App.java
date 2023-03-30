@@ -63,7 +63,7 @@ public class App {
                 } else{
                     InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/ruim.png"));
                     InputStream imagemPedro = new FileInputStream(new File("sobreposicao/umCoco.jpg"));
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "UMA MERDA", imagemAvaliacao, imagemPedro, Color.RED);
+                    geradorStickers.criar(filme.get("image"), filme.get("title"), "HORRÍVEL", imagemAvaliacao, imagemPedro, Color.RED);
                 }
             } else{
                 throw new RuntimeException("Opção Inexistente");

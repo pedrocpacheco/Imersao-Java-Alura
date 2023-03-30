@@ -13,6 +13,7 @@ public class BuscadorAPI {
     System.out.println("De qual API você deseja importar os dados? ");
     System.out.println("1- Séries | 2- Filmes");
     int opcao = cc.nextInt();
+    cc.close();
 
     String url;
     if(opcao == 1){
