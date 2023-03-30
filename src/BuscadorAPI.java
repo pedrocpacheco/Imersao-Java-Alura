@@ -8,22 +8,39 @@ import java.util.Scanner;
 
 public class BuscadorAPI {
 
-  public String buscarDadosApi() throws IOException, InterruptedException{
+    private String url;
+
+  public String buscarDadosApi(){
     Scanner cc = new Scanner(System.in);
     System.out.println("De qual API você deseja importar os dados? ");
-    System.out.println("1- Séries | 2- Filmes");
+    System.out.println("1- Séries | 2- Filmes | 3- Nasa");
     int opcao = cc.nextInt();
-    cc.close();
 
-    String url;
+    escolhaDaAPI(opcao);
+
+    try{
+
+        URI endereco = URI.create(this.url);
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder(endereco).GET().build();
+        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+        String body = response.body();
+        return body;
+    } catch(IOException | InterruptedException ex){
+        throw new RuntimeException(ex);
+    }
+  }
+
+  public void escolhaDaAPI(int opcao){
+    Scanner cc = new Scanner(System.in);
     if(opcao == 1){
         System.out.println("Você deseja receber a API de Séries mais Populares ou de Melhores Séries?");
         System.out.println("1- Melhores | 2- Mais Populares");
         int opcao2 = cc.nextInt();
         if(opcao2 == 1){
-            url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopTVs.json";
+            this.url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopTVs.json";
         } else if(opcao2 == 2){
-            url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
+            this.url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
         } else{
             throw new RuntimeException("Opção Indisponivel");
         };
@@ -32,22 +49,18 @@ public class BuscadorAPI {
         System.out.println("1- Melhores | 2- Mais Populares");
         int opcao2 = cc.nextInt();
         if(opcao2 == 1){
-            url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+            this.url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
         } else if(opcao2 == 2){
-            url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularMovies.json";
+            this.url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularMovies.json";
         ;} else{
             throw new RuntimeException("Opção Indisponivel");
         }
-    }  else{
+    }  else if(opcao == 3){
+        this.url = "https://api.nasa.gov/planetary/apod?api_key=whLrBn3wuZs7z1dG6CkcdQSGA7dnw1kNkNEDpbmR";
+     } else {
             throw new RuntimeException("Opção Indisponivel");
     }
+    }
 
-        URI endereco = URI.create(url);
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder(endereco).GET().build();
-        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-        String body = response.body();
-        return body;
-  }
-
+    
 }
