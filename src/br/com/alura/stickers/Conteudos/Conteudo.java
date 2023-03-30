@@ -1,4 +1,5 @@
-public class Conteudo {
+package br.com.alura.stickers.Conteudos;
+public abstract class Conteudo {
  
   private String titulo;
   private String urlImagem;

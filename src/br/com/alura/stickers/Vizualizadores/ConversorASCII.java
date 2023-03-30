@@ -1,3 +1,4 @@
+package br.com.alura.stickers.Vizualizadores;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;

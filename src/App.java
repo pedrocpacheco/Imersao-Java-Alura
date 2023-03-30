@@ -2,9 +2,14 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import BuscarAPI.BuscadorAPI;
+import br.com.alura.stickers.Vizualizadores.ConversorASCII;
+import br.com.alura.stickers.Vizualizadores.CriadorJFrame;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -15,6 +20,8 @@ public class App {
         // METODO Buscar
         String json = buscadorAPI.buscarDadosApi();
 
+        List<Conteudo> conteudos = new ArrayList<>();
+
         // MENU escolha de modo de imagem
         Scanner cc = new Scanner(System.in);
 
@@ -23,11 +30,6 @@ public class App {
         System.out.println("1- ASCII | 2- JFRAME | 3- Figurinhas");
         int opcaoVizualicao = cc.nextInt();
         cc.close();
-
-        // OBJETO Filtador  
-        FiltradorLista filtradorLista = new FiltradorLista();
-        // METODO Buscar
-        List<Map<String, String>> listaFiltrada =  filtradorLista.filtrarLista(json);
 
         // LOOP Mostrar Infos Padrões
         for (Map<String,String> filme : listaFiltrada) {

@@ -1,3 +1,4 @@
+package br.com.alura.stickers.JsonParser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
