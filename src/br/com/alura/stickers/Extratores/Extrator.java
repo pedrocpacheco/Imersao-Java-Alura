@@ -8,8 +8,6 @@ import br.com.alura.stickers.Conteudos.ConteudoNasa;
 
 public abstract class Extrator {
 
-  
-
   public List<ConteudoIMDB> extraiIMDB(String json){
     throw new RuntimeException("Metodo não definido");
   }

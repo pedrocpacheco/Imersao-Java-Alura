@@ -1,46 +1,21 @@
 import java.util.List;
 import java.util.Scanner;
 
-import BuscarAPI.API;
 import BuscarAPI.BuscadorAPI;
-import br.com.alura.stickers.Conteudos.Conteudo;
 import br.com.alura.stickers.Conteudos.ConteudoIMDB;
 import br.com.alura.stickers.Conteudos.ConteudoNasa;
-import br.com.alura.stickers.Extratores.Extrator;
 import br.com.alura.stickers.Extratores.ExtratorIMDB;
 import br.com.alura.stickers.Extratores.ExtratorNasa;
 import br.com.alura.stickers.Vizualizadores.EscolhaVizualizacao;
-
 
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Pegando Informações da API:"); 
         BuscadorAPI buscadorAPI = new BuscadorAPI(); // Pegando API
-        String json = buscadorAPI.buscarDadosApi();  // Salvando JSON em uma String
-
-        int opcao = buscadorAPI.getTipoBuscado();
-        Extrator extrator =  buscadorAPI.getApi().getExtrator();
-        List<Conteudo> conteudos;
-
-        // MENU escolha de modo de imagem
-        Scanner cc = new Scanner(System.in);
-        // Opções de modo de imagem
-        System.out.println("Como você deseja vizualizar as imagens dos filmes/series?");
-        System.out.println("1- ASCII | 2- JFRAME | 3- Figurinhas");
-        int opcaoVizualicao = cc.nextInt();
-
-        for(Conteudo item : conteudos){
-            System.out.println("\u001b[1mTitulo:\u001b[m " + item.getTitulo());
-            System.out.println("\u001b[1mImagem:\u001b[m " + item.getUrlImagem());
-        }
-        
-        if(opcao == 1){
-            
-        }
-
+        String json = buscadorAPI.buscarDadosApi();  // Salvando JSOn da 
 
         if(buscadorAPI.getTipoBuscado() == 1 || buscadorAPI.getTipoBuscado() == 2){
-            extrator = (ExtratorIMDB) extrator;
+            ExtratorIMDB extrator = new ExtratorIMDB();
             List<ConteudoIMDB> listaConteudos = extrator.extrai(json);
             // MENU escolha de modo de imagem
             Scanner cc = new Scanner(System.in);
