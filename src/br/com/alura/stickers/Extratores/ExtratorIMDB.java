@@ -13,7 +13,7 @@ public class ExtratorIMDB extends Extrator{
     List<Map<String, String>> listaAtributosBodyAPI = parser.parse(json);
 
     return listaAtributosBodyAPI.stream()
-      .map((atributos) -> new ConteudoIMDB(atributos.get("title"), atributos.get("url"), atributos.get("rating")))
+      .map((atributos) -> new ConteudoIMDB(atributos.get("title"), atributos.get("image"), atributos.get("imDbRating")))
       .toList();
     }
 }

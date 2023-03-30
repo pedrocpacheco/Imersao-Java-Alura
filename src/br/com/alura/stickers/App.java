@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.com.alura.stickers.BuscarAPI.ConstrutorAPI;
+import br.com.alura.stickers.Conteudos.Conteudo;
 import br.com.alura.stickers.Conteudos.ConteudoIMDB;
 import br.com.alura.stickers.Conteudos.ConteudoNasa;
 import br.com.alura.stickers.Extratores.ExtratorIMDB;
@@ -18,15 +19,19 @@ public class App {
         DefinidorAPIBuscada definidorAPI = new DefinidorAPIBuscada();
         String urlAPI = definidorAPI.escolhaDaAPI(opcao);
 
-        ConstrutorAPI buscadorAPI = new ConstrutorAPI(); // Pegando API
-        String json = buscadorAPI.construirAPI(urlAPI);  // Salvando JSOn da 
+        ConstrutorAPI buscadorAPI = new ConstrutorAPI(); 
+        String json = buscadorAPI.construirAPI(urlAPI);  
+
+        // ExtratorIMDB extrator = new ExtratorIMDB();
+        // List<ConteudoIMDB> listaConteudos = extrator.extraiIMDB(json);
+        int opcaoImagem = menu.perguntarQualTipoImagem();
+
 
         if(definidorAPI.getTipoBuscado() == 1 || definidorAPI.getTipoBuscado() == 2){
+            
             ExtratorIMDB extrator = new ExtratorIMDB();
-            List<ConteudoIMDB> listaConteudos = extrator.extrai(json);
-            // MENU escolha de modo de imagem
-            Scanner cc = new Scanner(System.in);
-            // Opções de modo de imagem
+            List<ConteudoIMDB> listaConteudos = extrator.extraiIMDB(json);
+
             for(ConteudoIMDB item : listaConteudos){
                 System.out.println("\u001b[1mTitulo:\u001b[m " + item.getTitulo());
                 System.out.println("\u001b[1mImagem:\u001b[m " + item.getUrlImagem());
@@ -34,21 +39,17 @@ public class App {
                 double notaEmDouble = Double.parseDouble(item.getRating());
                 imprimirEstrelas(notaEmDouble);
 
-                cc.close();
                 EscolhaVizualizacao escolha = new EscolhaVizualizacao();
-                escolha.escolherVizualizacao(opcaoVizualicao, item);
+                escolha.escolherVizualizacao(opcaoImagem, item);
 
             }
         } 
         else if (definidorAPI.getTipoBuscado() == 3) {
             ExtratorNasa extrator = new ExtratorNasa();
-            List<ConteudoNasa> listaConteudos = extrator.extrai(json);
+            List<ConteudoNasa> listaConteudos = extrator.extraiNasa(json);
             // MENU escolha de modo de imagem
             Scanner cc = new Scanner(System.in);
             // Opções de modo de imagem
-            System.out.println("Como você deseja vizualizar as imagens dos filmes/series?");
-            System.out.println("1- ASCII | 2- JFRAME | 3- Figurinhas");
-            int opcaoVizualicao = cc.nextInt();
 
             for(ConteudoNasa item : listaConteudos){
                 System.out.println("\u001b[1mTitulo:\u001b[m " + item.getTitulo());
@@ -57,7 +58,7 @@ public class App {
                 
                 cc.close();
                 EscolhaVizualizacao escolha = new EscolhaVizualizacao();
-                escolha.escolherVizualizacao(opcaoVizualicao, item);
+                escolha.escolherVizualizacao(opcaoImagem, item);
             }
         }
     }
