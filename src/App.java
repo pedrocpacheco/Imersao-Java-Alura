@@ -55,15 +55,15 @@ public class App {
                 if(notaEmDouble >= 9){
                     InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/masterpeca.png"));
                     InputStream imagemPedro = new FileInputStream(new File("sobreposicao/aprovado.png"));
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "MASTERPIECE", imagemAvaliacao, imagemPedro, Color.GREEN);
+                    geradorStickers.criarIMDB(filme.get("image"), filme.get("title"), "MASTERPIECE", imagemAvaliacao, imagemPedro, Color.GREEN);
                 } else if(notaEmDouble <= 9 && notaEmDouble >= 8.7){
                     InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/bom.png"));
                     InputStream imagemPedro = new FileInputStream(new File("sobreposicao/naMedia.png"));
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "BOM CONTEUDO", imagemAvaliacao, imagemPedro, Color.BLUE);
+                    geradorStickers.criarIMDB(filme.get("image"), filme.get("title"), "BOM CONTEUDO", imagemAvaliacao, imagemPedro, Color.BLUE);
                 } else{
                     InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/ruim.png"));
                     InputStream imagemPedro = new FileInputStream(new File("sobreposicao/umCoco.jpg"));
-                    geradorStickers.criar(filme.get("image"), filme.get("title"), "HORRÍVEL", imagemAvaliacao, imagemPedro, Color.RED);
+                    geradorStickers.criarIMDB(filme.get("image"), filme.get("title"), "HORRÍVEL", imagemAvaliacao, imagemPedro, Color.RED);
                 }
             } else{
                 throw new RuntimeException("Opção Inexistente");
