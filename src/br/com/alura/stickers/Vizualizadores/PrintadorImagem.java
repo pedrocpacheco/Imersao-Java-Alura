@@ -9,9 +9,9 @@ import br.com.alura.stickers.Conteudos.Conteudo;
 import br.com.alura.stickers.Conteudos.ConteudoIMDB;
 import br.com.alura.stickers.Conteudos.ConteudoNasa;
 
-public class EscolhaVizualizacao {
+public class PrintadorImagem {
 
-  public void escolherVizualizacao(int opcao, Conteudo item) throws Exception{
+  public void fazerImagem(int opcao, Conteudo item) throws Exception{
     if(opcao == 1){
       ConversorASCII conversorASCII = new ConversorASCII();
       System.out.println(conversorASCII.imageParaAscii(item.getUrlImagem()));
@@ -42,7 +42,6 @@ public class EscolhaVizualizacao {
         ConteudoNasa itemNasa = (ConteudoNasa) item;
         String date = itemNasa.getDate().substring(0, 4);
         int notaEmDouble = Integer.parseInt(date);
-        notaEmDouble -= 2;
         if(notaEmDouble == 2023){
           InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/NASA/esquerdaA.png"));
           InputStream imagemPedro = new FileInputStream(new File("sobreposicao/NASA/direitaA.png"));
