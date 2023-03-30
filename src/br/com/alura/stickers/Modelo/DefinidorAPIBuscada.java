@@ -1,4 +1,4 @@
-package br.com.alura.stickers;
+package br.com.alura.stickers.Modelo;
 
 import java.util.Scanner;
 

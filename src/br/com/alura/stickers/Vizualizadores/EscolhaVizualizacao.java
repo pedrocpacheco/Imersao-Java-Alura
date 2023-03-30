@@ -25,16 +25,16 @@ public class EscolhaVizualizacao {
         ConteudoIMDB itemIMDB = (ConteudoIMDB) item;
         double notaEmDouble = Double.parseDouble(itemIMDB.getRating());
         if(notaEmDouble >= 9){
-          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/masterpeca.png"));
-          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/aprovado.png"));
+          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/IMDB/masterpeca.png"));
+          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/IMDB/aprovado.png"));
           geradorStickers.criar(itemIMDB, "MASTERPIECE", imagemAvaliacao, imagemPedro, Color.GREEN);
         } else if(notaEmDouble < 9 && notaEmDouble >= 8.7){
-          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/bom.png"));
-          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/naMedia.png"));
+          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/IMDB/bom.png"));
+          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/IMDB/naMedia.png"));
           geradorStickers.criar(itemIMDB, "BOM CONTEUDO", imagemAvaliacao, imagemPedro, Color.CYAN);
         } else{
-          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/ruim.png"));
-          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/umCoco.jpg"));
+          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/IMDB/ruim.png"));
+          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/IMDB/umCoco.jpg"));
           geradorStickers.criar(itemIMDB, "HORRIPILANTE", imagemAvaliacao, imagemPedro, Color.RED);
         }
         
@@ -42,17 +42,18 @@ public class EscolhaVizualizacao {
         ConteudoNasa itemNasa = (ConteudoNasa) item;
         String date = itemNasa.getDate().substring(0, 4);
         int notaEmDouble = Integer.parseInt(date);
+        notaEmDouble -= 2;
         if(notaEmDouble == 2023){
-          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/masterpeca.png"));
-          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/aprovado.png"));
-          geradorStickers.criar(itemNasa, "FOI ESSE ANO", imagemAvaliacao, imagemPedro, Color.GREEN);
+          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/NASA/esquerdaA.png"));
+          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/NASA/direitaA.png"));
+          geradorStickers.criar(itemNasa, "FOI ESSE ANO", imagemAvaliacao, imagemPedro, Color.GRAY);
         } else if(notaEmDouble == 2022){
-          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/bom.png"));
-          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/naMedia.png"));
-          geradorStickers.criar(itemNasa, "FOI ANO PASSADO", imagemAvaliacao, imagemPedro, Color.CYAN);
+          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/NASA/esquerdaB.png"));
+          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/NASA/direitaB.png"));
+          geradorStickers.criar(itemNasa, "FOI ANO PASSADO", imagemAvaliacao, imagemPedro, Color.DARK_GRAY);
         } else{
-          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/ruim.png"));
-          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/umCoco.jpg"));
+          InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/NASA/esquerdaC.png"));
+          InputStream imagemPedro = new FileInputStream(new File("sobreposicao/NASA/direitaC.png"));
           geradorStickers.criar(itemNasa, "FAZ TEMPO JÁ", imagemAvaliacao, imagemPedro, Color.RED);
         }
       }
