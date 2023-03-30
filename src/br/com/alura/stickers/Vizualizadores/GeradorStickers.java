@@ -1,3 +1,4 @@
+package br.com.alura.stickers.Vizualizadores;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
