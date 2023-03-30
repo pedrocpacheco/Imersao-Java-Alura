@@ -40,13 +40,13 @@ public class EscolhaVizualizacao {
         
       } else if(item instanceof ConteudoNasa){
         ConteudoNasa itemNasa = (ConteudoNasa) item;
-        String date = itemNasa.getDate().substring(0, 3);
-        double notaEmDouble = Double.parseDouble(date);
-        if(notaEmDouble > 2023){
+        String date = itemNasa.getDate().substring(0, 4);
+        int notaEmDouble = Integer.parseInt(date);
+        if(notaEmDouble == 2023){
           InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/masterpeca.png"));
           InputStream imagemPedro = new FileInputStream(new File("sobreposicao/aprovado.png"));
           geradorStickers.criar(itemNasa, "FOI ESSE ANO", imagemAvaliacao, imagemPedro, Color.GREEN);
-        } else if(notaEmDouble > 2022){
+        } else if(notaEmDouble == 2022){
           InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/bom.png"));
           InputStream imagemPedro = new FileInputStream(new File("sobreposicao/naMedia.png"));
           geradorStickers.criar(itemNasa, "FOI ANO PASSADO", imagemAvaliacao, imagemPedro, Color.CYAN);
