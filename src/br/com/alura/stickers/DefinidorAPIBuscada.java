@@ -1,43 +1,15 @@
-package BuscarAPI;
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandlers;
+package br.com.alura.stickers;
+
 import java.util.Scanner;
 
-public class BuscadorAPI {
+import br.com.alura.stickers.BuscarAPI.ConexaoAPIException;
 
-    private int tipoBuscado; 
-    private String url;
+public class DefinidorAPIBuscada {
+  
+  private int tipoBuscado; 
+  private String url;
 
-    public int getTipoBuscado() {
-      return tipoBuscado;
-    }
-
-  public String buscarDadosApi(){
-    Scanner cc = new Scanner(System.in);
-    System.out.println("De qual API você deseja importar os dados? ");
-    System.out.println("1- Séries | 2- Filmes | 3- Nasa");
-    int opcao = cc.nextInt();
-
-    escolhaDaAPI(opcao);
-
-    try{
-
-        URI endereco = URI.create(this.url);
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder(endereco).GET().build();
-        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-        String body = response.body();
-        return body;
-    } catch(IOException | InterruptedException ex){
-        throw new RuntimeException(ex);
-    }
-  }
-
-  public void escolhaDaAPI(int opcao){
+  public String escolhaDaAPI(int opcao){
     Scanner cc = new Scanner(System.in);
     if(opcao == 1){
         System.out.println("Você deseja receber a API de Séries mais Populares ou de Melhores Séries?");
@@ -69,7 +41,12 @@ public class BuscadorAPI {
     }
     else{
         throw new ConexaoAPIException("Erro ao Consultar AP");
-    } 
+    }
+      return this.url; 
+    }
+
+    public int getTipoBuscado() {
+      return tipoBuscado;
     }
 
 }

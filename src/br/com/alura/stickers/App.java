@@ -1,29 +1,32 @@
+package br.com.alura.stickers;
 import java.util.List;
 import java.util.Scanner;
 
-import BuscarAPI.BuscadorAPI;
+import br.com.alura.stickers.BuscarAPI.ConstrutorAPI;
 import br.com.alura.stickers.Conteudos.ConteudoIMDB;
 import br.com.alura.stickers.Conteudos.ConteudoNasa;
 import br.com.alura.stickers.Extratores.ExtratorIMDB;
 import br.com.alura.stickers.Extratores.ExtratorNasa;
+import br.com.alura.stickers.Menu.Menu;
 import br.com.alura.stickers.Vizualizadores.EscolhaVizualizacao;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Pegando Informações da API:"); 
-        BuscadorAPI buscadorAPI = new BuscadorAPI(); // Pegando API
-        String json = buscadorAPI.buscarDadosApi();  // Salvando JSOn da 
+        Menu menu = new Menu();
+        int opcao = menu.perguntarQualAPI();
 
-        if(buscadorAPI.getTipoBuscado() == 1 || buscadorAPI.getTipoBuscado() == 2){
+        DefinidorAPIBuscada definidorAPI = new DefinidorAPIBuscada();
+        String urlAPI = definidorAPI.escolhaDaAPI(opcao);
+
+        ConstrutorAPI buscadorAPI = new ConstrutorAPI(); // Pegando API
+        String json = buscadorAPI.construirAPI(urlAPI);  // Salvando JSOn da 
+
+        if(definidorAPI.getTipoBuscado() == 1 || definidorAPI.getTipoBuscado() == 2){
             ExtratorIMDB extrator = new ExtratorIMDB();
             List<ConteudoIMDB> listaConteudos = extrator.extrai(json);
             // MENU escolha de modo de imagem
             Scanner cc = new Scanner(System.in);
             // Opções de modo de imagem
-            System.out.println("Como você deseja vizualizar as imagens dos filmes/series?");
-            System.out.println("1- ASCII | 2- JFRAME | 3- Figurinhas");
-            int opcaoVizualicao = cc.nextInt();
-
             for(ConteudoIMDB item : listaConteudos){
                 System.out.println("\u001b[1mTitulo:\u001b[m " + item.getTitulo());
                 System.out.println("\u001b[1mImagem:\u001b[m " + item.getUrlImagem());
@@ -37,7 +40,7 @@ public class App {
 
             }
         } 
-        else if (buscadorAPI.getTipoBuscado() == 3) {
+        else if (definidorAPI.getTipoBuscado() == 3) {
             ExtratorNasa extrator = new ExtratorNasa();
             List<ConteudoNasa> listaConteudos = extrator.extrai(json);
             // MENU escolha de modo de imagem

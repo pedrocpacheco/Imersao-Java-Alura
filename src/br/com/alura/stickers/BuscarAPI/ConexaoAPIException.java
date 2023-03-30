@@ -1,4 +1,4 @@
-package BuscarAPI;
+package br.com.alura.stickers.BuscarAPI;
 
 public class ConexaoAPIException extends RuntimeException {
 
