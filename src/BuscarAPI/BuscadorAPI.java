@@ -65,11 +65,11 @@ public class BuscadorAPI {
         this.tipoBuscado = opcao;
     }  else if(opcao == 3){
         this.url = "https://api.nasa.gov/planetary/apod?api_key=whLrBn3wuZs7z1dG6CkcdQSGA7dnw1kNkNEDpbmR";
-        this.tipoBuscado = opcao;
-     } else {
-            throw new RuntimeException("Opção Indisponivel");
+        this.tipoBuscado = opcao; 
     }
+    else{
+            throw new RuntimeException("Opção Indisponivel");
+    } 
     }
 
-    
 }

@@ -1,21 +1,11 @@
-import java.awt.Color;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import BuscarAPI.BuscadorAPI;
-import br.com.alura.stickers.Conteudos.Conteudo;
 import br.com.alura.stickers.Conteudos.ConteudoIMDB;
 import br.com.alura.stickers.Conteudos.ConteudoNasa;
-import br.com.alura.stickers.Extratores.Extrator;
 import br.com.alura.stickers.Extratores.ExtratorIMDB;
 import br.com.alura.stickers.Extratores.ExtratorNasa;
-import br.com.alura.stickers.Vizualizadores.ConversorASCII;
-import br.com.alura.stickers.Vizualizadores.CriadorJFrame;
 import br.com.alura.stickers.Vizualizadores.EscolhaVizualizacao;
 
 public class App {
@@ -39,33 +29,38 @@ public class App {
 
             for(ConteudoIMDB item : listaConteudos){
                 System.out.println("\u001b[1mTitulo:\u001b[m " + item.getTitulo());
-                System.out.println("\u001b[1mTitulo:\u001b[m " + item.getUrlImagem());
-                System.out.println("\u001b[1mTitulo:\u001b[m " + item.getRating());
+                System.out.println("\u001b[1mImagem:\u001b[m " + item.getUrlImagem());
+                System.out.println("\u001b[1mRating:\u001b[m " + item.getRating());
                 double notaEmDouble = Double.parseDouble(item.getRating());
                 imprimirEstrelas(notaEmDouble);
-                
+
                 cc.close();
                 EscolhaVizualizacao escolha = new EscolhaVizualizacao();
                 escolha.escolherVizualizacao(opcaoVizualicao, item);
 
             }
-        } else{
+        } 
+        else if (buscadorAPI.getTipoBuscado() == 3) {
             ExtratorNasa extrator = new ExtratorNasa();
-            List<ConteudoNasa> listaConteudos =  extrator.extrai(json);
+            List<ConteudoNasa> listaConteudos = extrator.extrai(json);
             // MENU escolha de modo de imagem
             Scanner cc = new Scanner(System.in);
-
             // Opções de modo de imagem
             System.out.println("Como você deseja vizualizar as imagens dos filmes/series?");
             System.out.println("1- ASCII | 2- JFRAME | 3- Figurinhas");
             int opcaoVizualicao = cc.nextInt();
-            cc.close();
 
-            for(Conteudo item: listaConteudos){
+            for(ConteudoNasa item : listaConteudos){
+                System.out.println("\u001b[1mTitulo:\u001b[m " + item.getTitulo());
+                System.out.println("\u001b[1mImagem:\u001b[m " + item.getUrlImagem());
+                System.out.println("\u001b[1mDate:\u001b[m " + item.getDate());
                 
+                cc.close();
+                EscolhaVizualizacao escolha = new EscolhaVizualizacao();
+                escolha.escolherVizualizacao(opcaoVizualicao, item);
             }
-
         }
+    }
 
 
         // // MENU escolha de modo de imagem
@@ -117,7 +112,7 @@ public class App {
         //     }
         //     }
         // }
-        }
+        
     public static void imprimirEstrelas(double notaEmDouble) {
 
         int notaEmInt = (int) notaEmDouble;

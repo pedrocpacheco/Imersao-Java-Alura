@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.alura.stickers.Conteudos.ConteudoIMDB;
-import br.com.alura.stickers.JsonParser.JsonParser;
+import br.com.alura.stickers.JsonParsers.JsonParser;
 
 public class ExtratorIMDB{
   public List<ConteudoIMDB> extrai(String json){

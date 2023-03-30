@@ -12,33 +12,20 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.io.File;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+
+import br.com.alura.stickers.Conteudos.Conteudo;
 
 public class GeradorStickers {
  
   public GeradorStickers() {
   }
 
-  public void criarNasa(){
-
-  }
-
-  public void criarIMDB(String urlImagem, String nomeFilme, String fraseAdicionada, InputStream imagemAvaliacao, InputStream imagemPedro, Color cor) throws Exception{
-
-    BufferedImage novaImagem = criarPadrao(urlImagem, nomeFilme, fraseAdicionada, imagemAvaliacao, imagemPedro, cor);
-
-    // Escrever em arquivo
-    nomeFilme = nomeFilme.replaceAll(":", "");
-    ImageIO.write(novaImagem, "png", new File("saida/" + nomeFilme + ".png"));
-
-  }
-
-  public BufferedImage criarPadrao(String urlImagem, String nomeFilme, String fraseAdicionada, InputStream imagemAvaliacao, InputStream imagemPedro, Color cor) throws Exception{
+  public void criar(Conteudo item, String fraseAdicionada, InputStream imagemAvaliacao, InputStream imagemPedro, Color cor) throws Exception{
       // Passando a imagem para URL
-      URL urlImagemURL =  new URL(urlImagem);
+      URL urlImagemURL =  new URL(item.getUrlImagem());
 
       // Leitura da Imagem
       BufferedImage imagemOriginal = ImageIO.read(urlImagemURL);
@@ -89,7 +76,10 @@ public class GeradorStickers {
       graphics.setColor(Color.BLACK);
       graphics.draw(outline);
       graphics.setClip(outline);
-      return novaImagem;
+
+      String nomeFilme = item.getTitulo().replaceAll(":", "");
+      ImageIO.write(novaImagem, "png", new File("saida/" + nomeFilme + ".png"));
+
   }
 
 }
