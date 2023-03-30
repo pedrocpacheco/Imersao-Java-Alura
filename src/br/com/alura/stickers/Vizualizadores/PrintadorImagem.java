@@ -42,6 +42,7 @@ public class PrintadorImagem {
         ConteudoNasa itemNasa = (ConteudoNasa) item;
         String date = itemNasa.getDate().substring(0, 4);
         int notaEmDouble = Integer.parseInt(date);
+        notaEmDouble -= 2;
         if(notaEmDouble == 2023){
           InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/NASA/esquerdaA.png"));
           InputStream imagemPedro = new FileInputStream(new File("sobreposicao/NASA/direitaA.png"));

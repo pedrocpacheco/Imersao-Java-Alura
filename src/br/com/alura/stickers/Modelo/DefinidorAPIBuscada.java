@@ -32,7 +32,7 @@ public class DefinidorAPIBuscada {
             throw new RuntimeException("Opção Indisponivel");
         };
     } else if(opcao == 2){
-        System.out.println("Você deseja receber a API de Séries mais Populares ou de Melhores Séries?");
+        System.out.println("Você deseja receber a API de Filmes mais Populares ou de Melhores Filmes?");
         System.out.println("1- Melhores | 2- Mais Populares");
         int opcao2 = cc.nextInt();
         if(opcao2 == 1){
