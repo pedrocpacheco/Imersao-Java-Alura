@@ -13,7 +13,7 @@ public class App {
         // OBJETO Buscador
         BuscadorAPI buscadorAPI = new BuscadorAPI();
         // METODO Buscar
-        String dadosAPI = buscadorAPI.buscarDadosApi();
+        String json = buscadorAPI.buscarDadosApi();
 
         // MENU escolha de modo de imagem
         Scanner cc = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class App {
         // OBJETO Filtador  
         FiltradorLista filtradorLista = new FiltradorLista();
         // METODO Buscar
-        List<Map<String, String>> listaFiltrada =  filtradorLista.filtrarLista(dadosAPI);
+        List<Map<String, String>> listaFiltrada =  filtradorLista.filtrarLista(json);
 
         // LOOP Mostrar Infos Padrões
         for (Map<String,String> filme : listaFiltrada) {
