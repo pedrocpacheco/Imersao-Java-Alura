@@ -11,7 +11,7 @@ public enum API {
   IMDB_SERIES_TOP("https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopTVs.json",  new ExtratorIMDB()),
   IMDB_SERIES_POPULAR("https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json", new ExtratorIMDB()),
 
-  NADA_APOD("https://api.nasa.gov/planetary/apod?api_key=whLrBn3wuZs7z1dG6CkcdQSGA7dnw1kNkNEDpbmR", new ExtratorNasa());
+  NASA_APOD("https://api.nasa.gov/planetary/apod?api_key=whLrBn3wuZs7z1dG6CkcdQSGA7dnw1kNkNEDpbmR", new ExtratorNasa());
 
   private String url;
   private Extrator extrator;

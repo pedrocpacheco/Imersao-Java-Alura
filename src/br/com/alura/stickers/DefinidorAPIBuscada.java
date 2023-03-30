@@ -2,12 +2,18 @@ package br.com.alura.stickers;
 
 import java.util.Scanner;
 
+import br.com.alura.stickers.BuscarAPI.API;
 import br.com.alura.stickers.BuscarAPI.ConexaoAPIException;
 
 public class DefinidorAPIBuscada {
   
   private int tipoBuscado; 
   private String url;
+  private API api;
+
+  public API getApi() {
+    return api;
+  }
 
   public String escolhaDaAPI(int opcao){
     Scanner cc = new Scanner(System.in);
@@ -17,9 +23,11 @@ public class DefinidorAPIBuscada {
         int opcao2 = cc.nextInt();
         this.tipoBuscado = opcao;
         if(opcao2 == 1){
-            this.url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopTVs.json";
+            this.api = API.IMDB_SERIES_TOP;
+            this.url = api.getUrl();
         } else if(opcao2 == 2){
-            this.url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
+            this.api = API.IMDB_SERIES_POPULAR;
+            this.url = api.getUrl();
         } else{
             throw new RuntimeException("Opção Indisponivel");
         };
@@ -28,15 +36,18 @@ public class DefinidorAPIBuscada {
         System.out.println("1- Melhores | 2- Mais Populares");
         int opcao2 = cc.nextInt();
         if(opcao2 == 1){
-            this.url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+            this.api = API.IMDB_FILMES_TOP;
+            this.url = api.getUrl();
         } else if(opcao2 == 2){
-            this.url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularMovies.json";
+            this.api = API.IMDB_FILMES_POPULAR;
+            this.url = api.getUrl();
         ;} else{
             throw new RuntimeException("Opção Indisponivel");
         } 
         this.tipoBuscado = opcao;
     }  else if(opcao == 3){
-        this.url = "https://api.nasa.gov/planetary/apod?api_key=whLrBn3wuZs7z1dG6CkcdQSGA7dnw1kNkNEDpbmR";
+        this.api = API.NASA_APOD;
+        this.url = api.getUrl();
         this.tipoBuscado = opcao; 
     }
     else{

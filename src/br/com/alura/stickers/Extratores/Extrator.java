@@ -9,7 +9,7 @@ import br.com.alura.stickers.Conteudos.ConteudoNasa;
 import br.com.alura.stickers.JsonParsers.JsonParser;
 
 
-public class Extrator {
+public abstract class Extrator {
 
   // public List<Conteudo> extrai(String json){
   //   JsonParser parser = new JsonParser();
