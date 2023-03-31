@@ -49,6 +49,10 @@ public class DefinidorAPIBuscada {
         this.api = API.NASA_APOD;
         this.url = api.getUrl();
         this.tipoBuscado = opcao; 
+    }  else if(opcao == 4){
+        this.api = API.NASA_APOD;
+        this.url = api.getUrl();
+        this.tipoBuscado = opcao; 
     }
     else{
         throw new ConexaoAPIException("Erro ao Consultar AP");

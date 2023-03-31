@@ -50,7 +50,7 @@ public class PrintadorImagem {
         } else if(notaEmDouble == 2022){
           InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/NASA/esquerdaB.png"));
           InputStream imagemPedro = new FileInputStream(new File("sobreposicao/NASA/direitaB.png"));
-          geradorStickers.criar(itemNasa, "FOI ANO PASSADO", imagemAvaliacao, imagemPedro, Color.DARK_GRAY);
+          geradorStickers.criar(itemNasa, "ANO PASSADO", imagemAvaliacao, imagemPedro, Color.BLUE);
         } else{
           InputStream imagemAvaliacao = new FileInputStream(new File("sobreposicao/NASA/esquerdaC.png"));
           InputStream imagemPedro = new FileInputStream(new File("sobreposicao/NASA/direitaC.png"));
