@@ -54,6 +54,7 @@ public class App {
                 for(ConteudoTWD item: listaConteudosTWD){
                     printadorInformacoes.printarInfosGerais(item.getTitulo(), item.getUrlImagem());
                     printadorInformacoes.printarInfosTWD(item.getFirstSeason(), item.getCommunity(), item.getGunType(), item.isAlive());
+                    System.out.println("");
                     printadorImagem.fazerImagem(opcaoImagem, item);
                 }
             }

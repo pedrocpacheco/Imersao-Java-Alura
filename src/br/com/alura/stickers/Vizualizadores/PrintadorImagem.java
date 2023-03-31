@@ -60,16 +60,16 @@ public class PrintadorImagem {
       } else if(item instanceof ConteudoTWD){
         ConteudoTWD itemTWD = (ConteudoTWD) item;
         Color cor;
-        if(itemTWD.isAlive() == "Alive"){
+        if(itemTWD.isAlive().equals("Alive")){
           cor = Color.YELLOW;
-        } else if(itemTWD.isAlive() == "Missing"){
+        } else if(itemTWD.isAlive().equals("Missing")){
           cor = Color.GRAY;
         } else{
           cor = Color.RED;
         }
         InputStream imagemTemporada = new FileInputStream(new File("sobreposicao/TWD/TEMPORADA/" + itemTWD.getFirstSeason() + ".png"));
         InputStream imagemComunidade = new FileInputStream(new File("sobreposicao/TWD/COMUNIDADE/" + itemTWD.getCommunity() + ".png"));
-        InputStream imagemArma = new FileInputStream(new File("sobreposicao/TWD/ARMA/" + itemTWD.getCommunity() + ".png"));
+        InputStream imagemArma = new FileInputStream(new File("sobreposicao/TWD/ARMA/" + itemTWD.getGunType() + ".png"));
         InputStream imagemStatus = new FileInputStream(new File("sobreposicao/TWD/STATUS/" + itemTWD.isAlive() + ".png"));
         geradorStickers.criarTWD(itemTWD, itemTWD.getTitulo(), imagemTemporada, imagemComunidade, imagemArma, imagemStatus, cor);
         

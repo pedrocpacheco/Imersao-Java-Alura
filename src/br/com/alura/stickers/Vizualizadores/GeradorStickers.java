@@ -102,12 +102,12 @@ public class GeradorStickers {
     // Criando sobreposicao
     BufferedImage sobreposicaoTemporada = ImageIO.read(imagemTemporada);
     BufferedImage sobreposicaoComunidade = ImageIO.read(imagemComunidade);
-    BufferedImage sobreposicaoArma = ImageIO.read(imagemComunidade);
-    BufferedImage sobreposicaoStatus = ImageIO.read(imagemComunidade);
+    BufferedImage sobreposicaoArma = ImageIO.read(imagemArma);
+    BufferedImage sobreposicaoStatus = ImageIO.read(imagemStatus);
 
     // Escrever frase na imagem
     // Configurando fonta
-    var fonte = new Font("impact", Font.BOLD, 100);
+    var fonte = new Font("impact", Font.BOLD, 65);
     graphics.setColor(cor);
     graphics.setFont(fonte);
 
@@ -122,10 +122,10 @@ public class GeradorStickers {
 
     //Esquerda
     graphics.drawImage(sobreposicaoComunidade,  0, novaAltura - sobreposicaoComunidade.getHeight(), null);
-    graphics.drawImage(sobreposicaoTemporada,  0, 0 + sobreposicaoTemporada.getHeight(), null);
+    graphics.drawImage(sobreposicaoTemporada,  0, 0, null);
 
     //Direita
-    graphics.drawImage(sobreposicaoArma,  imagemOriginal.getWidth() - sobreposicaoArma.getWidth(), 0 + sobreposicaoArma.getHeight(), null);
+    graphics.drawImage(sobreposicaoArma,  imagemOriginal.getWidth() - sobreposicaoArma.getWidth(), 0, null);
     graphics.drawImage(sobreposicaoStatus,  imagemOriginal.getWidth() - sobreposicaoStatus.getWidth(), novaAltura - sobreposicaoComunidade.getHeight(), null);
 
     // Fazendo Outline
