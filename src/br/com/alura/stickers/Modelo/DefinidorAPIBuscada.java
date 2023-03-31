@@ -50,7 +50,7 @@ public class DefinidorAPIBuscada {
         this.url = api.getUrl();
         this.tipoBuscado = opcao; 
     }  else if(opcao == 4){
-        this.api = API.NASA_APOD;
+        this.api = API.TWD;
         this.url = api.getUrl();
         this.tipoBuscado = opcao; 
     }

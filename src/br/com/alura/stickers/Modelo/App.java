@@ -4,8 +4,10 @@ import java.util.List;
 import br.com.alura.stickers.BuscarAPI.ConstrutorAPI;
 import br.com.alura.stickers.Conteudos.ConteudoIMDB;
 import br.com.alura.stickers.Conteudos.ConteudoNasa;
+import br.com.alura.stickers.Conteudos.ConteudoTWD;
 import br.com.alura.stickers.Extratores.ExtratorIMDB;
 import br.com.alura.stickers.Extratores.ExtratorNasa;
+import br.com.alura.stickers.Extratores.ExtratorTWD;
 import br.com.alura.stickers.Menu.Menu;
 import br.com.alura.stickers.Vizualizadores.PrintadorImagem;
 
@@ -46,6 +48,14 @@ public class App {
                     printadorImagem.fazerImagem(opcaoImagem, item); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
                 }
 
-     }
+            } else if(opcaoAPI == 4){
+                ExtratorTWD extratorTWD = new ExtratorTWD();
+                List<ConteudoTWD> listaConteudosTWD = extratorTWD.extraiTWD(json);
+                for(ConteudoTWD item: listaConteudosTWD){
+                    printadorInformacoes.printarInfosGerais(item.getTitulo(), item.getUrlImagem());
+                    printadorInformacoes.printarInfosTWD(item.getFirstSeason(), item.getCommunity(), item.getGunType(), item.isAlive());
+                    
+                }
+            }
 }
 }

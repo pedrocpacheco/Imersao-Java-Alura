@@ -30,4 +30,11 @@ public class PrintadorInformacoes {
     System.out.println("\u001b[1mDate:\u001b[m " + date);
   }
 
+  public void printarInfosTWD(String firstSeason, String community, String gunType, String alive){
+     System.out.println("\u001b[1mPrimeira Temporada Que Apareceu:\u001b[m " + firstSeason);
+     System.out.println("\u001b[1mComunidade que Pertence:\u001b[m " + community);
+     System.out.println("\u001b[1mTipo de Arma:\u001b[m " + gunType);
+     System.out.println("\u001b[1mEsta Vivo:\u001b[m " + alive);
+  }
+
 }
