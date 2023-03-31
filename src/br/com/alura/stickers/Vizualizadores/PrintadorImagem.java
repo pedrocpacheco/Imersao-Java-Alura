@@ -8,6 +8,7 @@ import java.io.File;
 import br.com.alura.stickers.Conteudos.Conteudo;
 import br.com.alura.stickers.Conteudos.ConteudoIMDB;
 import br.com.alura.stickers.Conteudos.ConteudoNasa;
+import br.com.alura.stickers.Conteudos.ConteudoTWD;
 
 public class PrintadorImagem {
 
@@ -56,6 +57,22 @@ public class PrintadorImagem {
           InputStream imagemPedro = new FileInputStream(new File("sobreposicao/NASA/direitaC.png"));
           geradorStickers.criar(itemNasa, "FAZ TEMPO JÁ", imagemAvaliacao, imagemPedro, Color.RED);
         }
+      } else if(item instanceof ConteudoTWD){
+        ConteudoTWD itemTWD = (ConteudoTWD) item;
+        Color cor;
+        if(itemTWD.isAlive() == "Alive"){
+          cor = Color.YELLOW;
+        } else if(itemTWD.isAlive() == "Missing"){
+          cor = Color.GRAY;
+        } else{
+          cor = Color.RED;
+        }
+        InputStream imagemTemporada = new FileInputStream(new File("sobreposicao/TWD/TEMPORADA/" + itemTWD.getFirstSeason() + ".png"));
+        InputStream imagemComunidade = new FileInputStream(new File("sobreposicao/TWD/COMUNIDADE/" + itemTWD.getCommunity() + ".png"));
+        InputStream imagemArma = new FileInputStream(new File("sobreposicao/TWD/ARMA/" + itemTWD.getCommunity() + ".png"));
+        InputStream imagemStatus = new FileInputStream(new File("sobreposicao/TWD/STATUS/" + itemTWD.isAlive() + ".png"));
+        geradorStickers.criarTWD(itemTWD, itemTWD.getTitulo(), imagemTemporada, imagemComunidade, imagemArma, imagemStatus, cor);
+        
       }
     }
   }

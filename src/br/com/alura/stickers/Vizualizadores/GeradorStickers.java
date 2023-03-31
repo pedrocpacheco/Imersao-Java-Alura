@@ -82,4 +82,71 @@ public class GeradorStickers {
 
   }
 
+  public void criarTWD(Conteudo item, String nome, InputStream imagemTemporada, InputStream imagemComunidade,  InputStream imagemArma,  InputStream imagemStatus, Color cor) throws Exception{
+    // Passando a imagem para URL
+    URL urlImagemURL =  new URL(item.getUrlImagem());
+
+    // Leitura da Imagem
+    BufferedImage imagemOriginal = ImageIO.read(urlImagemURL);
+
+    // Cria nova imagem em memoria com transparencia e novo tamanho
+    int largaura = imagemOriginal.getWidth();
+    int altura = imagemOriginal.getHeight();
+    int novaAltura = altura + 400;
+    BufferedImage novaImagem = new BufferedImage(largaura, novaAltura, BufferedImage.TRANSLUCENT);
+
+    // Copiar imagem original para nova
+    Graphics2D graphics = (Graphics2D) novaImagem.getGraphics();
+    graphics.drawImage(imagemOriginal, 0, 200, null);
+    
+    // Criando sobreposicao
+    BufferedImage sobreposicaoTemporada = ImageIO.read(imagemTemporada);
+    BufferedImage sobreposicaoComunidade = ImageIO.read(imagemComunidade);
+    BufferedImage sobreposicaoArma = ImageIO.read(imagemComunidade);
+    BufferedImage sobreposicaoStatus = ImageIO.read(imagemComunidade);
+
+    // Escrever frase na imagem
+    // Configurando fonta
+    var fonte = new Font("impact", Font.BOLD, 100);
+    graphics.setColor(cor);
+    graphics.setFont(fonte);
+
+    // Juntando imagem e texto
+    String texto = nome;
+    FontMetrics fontMetrics = graphics.getFontMetrics();
+    Rectangle2D retangulo = fontMetrics.getStringBounds(texto, graphics);
+    int larguraTexto = (int) retangulo.getWidth();
+    int posicaoTexto = (largaura - larguraTexto) / 2;
+
+    graphics.drawString(texto, posicaoTexto, novaAltura - 100);
+
+    //Esquerda
+    graphics.drawImage(sobreposicaoComunidade,  0, novaAltura - sobreposicaoComunidade.getHeight(), null);
+    graphics.drawImage(sobreposicaoTemporada,  0, 0 + sobreposicaoTemporada.getHeight(), null);
+
+    //Direita
+    graphics.drawImage(sobreposicaoArma,  imagemOriginal.getWidth() - sobreposicaoArma.getWidth(), 0 + sobreposicaoArma.getHeight(), null);
+    graphics.drawImage(sobreposicaoStatus,  imagemOriginal.getWidth() - sobreposicaoStatus.getWidth(), novaAltura - sobreposicaoComunidade.getHeight(), null);
+
+    // Fazendo Outline
+    FontRenderContext fontRendererContext = graphics.getFontRenderContext();
+    var textLayout = new TextLayout(texto, fonte, fontRendererContext);
+
+    Shape outline = textLayout.getOutline(null);
+    AffineTransform transform = graphics.getTransform();
+    transform.translate(posicaoTexto, novaAltura - 100);
+    graphics.setTransform(transform);
+
+    BasicStroke outlineStroke = new BasicStroke(largaura * 0.004f);
+    graphics.setStroke(outlineStroke);
+
+    graphics.setColor(Color.BLACK);
+    graphics.draw(outline);
+    graphics.setClip(outline);
+
+    String nomeFilme = item.getTitulo().replaceAll(":", "");
+    ImageIO.write(novaImagem, "png", new File("saida/" + nomeFilme + ".png"));
+
+}
+
 }

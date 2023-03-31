@@ -6,12 +6,12 @@ public class ConteudoTWD extends Conteudo{
   private String gunType;
   private String alive;
 
-  public ConteudoTWD(String titulo, String urlImagem, String firstSeason, String community, String gunType, String alive) {
+  public ConteudoTWD(String titulo, String urlImagem, String string, String community, String gunType, String string2) {
     super(titulo, urlImagem);
-    this.firstSeason = firstSeason;
+    this.firstSeason = String.valueOf(string);
     this.community = community;
     this.gunType = gunType;
-    this.alive = alive;
+    this.alive = String.valueOf(string2);
     //TODO Auto-generated constructor stub
   }
 
