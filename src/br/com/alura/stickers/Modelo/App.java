@@ -28,7 +28,8 @@ public class App {
         PrintadorInformacoes printadorInformacoes = new PrintadorInformacoes(); // Cria o Printador de informações
         PrintadorImagem printadorImagem = new PrintadorImagem(); // Cria o Printador da Imagem
        
-        if(opcaoAPI == 1 || opcaoAPI == 2){
+        switch (opcaoAPI){
+            case(1):
                 ExtratorIMDB extrator = (ExtratorIMDB) definidorAPI.getApi().getExtrator(); // Define o Extrator referente ao Tipo da API 
                 List<ConteudoIMDB> listaConteudos = extrator.extraiIMDB(json); // Cria uma Lista de Conteudos
 
@@ -37,8 +38,18 @@ public class App {
                     printadorInformacoes.printarIMDBRating(item.getRating()); // Printa Informações Especificas desta API (RATING)
                     printadorImagem.fazerImagem(opcaoImagem, item); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
                 }
+                break;
+            case(2):
+                ExtratorIMDB extrator15 = (ExtratorIMDB) definidorAPI.getApi().getExtrator(); // Define o Extrator referente ao Tipo da API 
+                List<ConteudoIMDB> listaConteudos15 = extrator15.extraiIMDB(json); // Cria uma Lista de Conteudos
 
-            } else if(opcaoAPI == 3){
+                for(ConteudoIMDB item : listaConteudos15){ // Para cada Item na Lista de Conteudos:
+                    printadorInformacoes.printarInfosGerais(item.getTitulo(), item.getUrlImagem()); // Printa Informações Gerais
+                    printadorInformacoes.printarIMDBRating(item.getRating()); // Printa Informações Especificas desta API (RATING)
+                    printadorImagem.fazerImagem(opcaoImagem, item); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
+                }
+                break;
+            case(3):
                 ExtratorNasa extrator3 = new ExtratorNasa(); // Define o Extrator referente ao Tipo da API 
                 List<ConteudoNasa> listaConteudos3 = extrator3.extraiNasa(json); // Cria uma Lista de Conteudos
                 
@@ -47,8 +58,8 @@ public class App {
                     printadorInformacoes.printarNasaDate(item.getDate()); // Printa Informações Especificas desta API (DATE)
                     printadorImagem.fazerImagem(opcaoImagem, item); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
                 }
-
-            } else if(opcaoAPI == 4){
+                break;
+            case(4):
                 ExtratorTWD extratorTWD = new ExtratorTWD();
                 List<ConteudoTWD> listaConteudosTWD = extratorTWD.extraiTWD(json);
                 for(ConteudoTWD item: listaConteudosTWD){
@@ -56,7 +67,9 @@ public class App {
                     printadorInformacoes.printarInfosTWD(item.getFirstSeason(), item.getCommunity(), item.getGunType(), item.isAlive());
                     System.out.println("");
                     printadorImagem.fazerImagem(opcaoImagem, item);
-                }
-            }
+                }   
+                break;
+        }
+        
 }
 }

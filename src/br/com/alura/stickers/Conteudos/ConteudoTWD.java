@@ -12,7 +12,6 @@ public class ConteudoTWD extends Conteudo{
     this.community = community;
     this.gunType = gunType;
     this.alive = String.valueOf(string2);
-    //TODO Auto-generated constructor stub
   }
 
   public String getFirstSeason() {
