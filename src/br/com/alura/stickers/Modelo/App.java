@@ -36,7 +36,7 @@ public class App {
                 for(ConteudoIMDB item : listaConteudos){ // Para cada Item na Lista de Conteudos:
                     printadorInformacoes.printarInfosGerais(item.getTitulo(), item.getUrlImagem()); // Printa Informações Gerais
                     printadorInformacoes.printarIMDBRating(item.getRating()); // Printa Informações Especificas desta API (RATING)
-                    printadorImagem.fazerImagem(opcaoImagem, item); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
+                    printadorImagem.fazerImagem(opcaoImagem, item, opcaoAPI); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
                 }
                 break;
             case(2):
@@ -46,7 +46,7 @@ public class App {
                 for(ConteudoIMDB item : listaConteudos15){ // Para cada Item na Lista de Conteudos:
                     printadorInformacoes.printarInfosGerais(item.getTitulo(), item.getUrlImagem()); // Printa Informações Gerais
                     printadorInformacoes.printarIMDBRating(item.getRating()); // Printa Informações Especificas desta API (RATING)
-                    printadorImagem.fazerImagem(opcaoImagem, item); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
+                    printadorImagem.fazerImagem(opcaoImagem, item, opcaoAPI); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
                 }
                 break;
             case(3):
@@ -56,7 +56,7 @@ public class App {
                 for(ConteudoNasa item : listaConteudos3){ // Para cada Item na Lista de Conteudos:
                     printadorInformacoes.printarInfosGerais(item.getTitulo(), item.getUrlImagem()); // Printa Informações Gerais
                     printadorInformacoes.printarNasaDate(item.getDate()); // Printa Informações Especificas desta API (DATE)
-                    printadorImagem.fazerImagem(opcaoImagem, item); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
+                    printadorImagem.fazerImagem(opcaoImagem, item, opcaoAPI); // Cria a imagem (ASCII | JFRAME | FIGURINNHA)
                 }
                 break;
             case(4):
@@ -66,7 +66,7 @@ public class App {
                     printadorInformacoes.printarInfosGerais(item.getTitulo(), item.getUrlImagem());
                     printadorInformacoes.printarInfosTWD(item.getFirstSeason(), item.getCommunity(), item.getGunType(), item.isAlive());
                     System.out.println("");
-                    printadorImagem.fazerImagem(opcaoImagem, item);
+                    printadorImagem.fazerImagem(opcaoImagem, item, opcaoAPI);
                 }   
                 break;
         }

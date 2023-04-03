@@ -14,7 +14,7 @@ public enum API {
 
   NASA_APOD("https://api.nasa.gov/planetary/apod?api_key=whLrBn3wuZs7z1dG6CkcdQSGA7dnw1kNkNEDpbmR", new ExtratorNasa()),
 
-  TWD("http://localhost:8080/characters", new ExtratorTWD());
+  TWD("https://api-twd-characters-production.up.railway.app/characters", new ExtratorTWD());
 
   private String url;
   private Extrator extrator;
