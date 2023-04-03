@@ -149,7 +149,7 @@ Figurinhas com essa data contém:
 As figurinhas de Personagens de The Walking Dead são feitas através de uma API que eu desenvolvi, você pode acessalá em:
 
 - Link API: https://api-twd-characters-production.up.railway.app/characters
-- Link repositoio API: https://github.com/pedrocpacheco/API-TWD-Characters
+- Link repositorio no Github da API: https://github.com/pedrocpacheco/API-TWD-Characters
 
 Os personagens que estão nessa API, contém as seguintes informações:
 ![App Screenshot](https://pbs.twimg.com/media/Fsz0NnNWIA0ZLIg?format=png&name=medium)
