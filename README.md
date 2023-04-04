@@ -1,6 +1,6 @@
 # Criador de Figurinhas com APIs
 
-Aplicação que cria figurinhas dinâmicas a partir das informações da API desejada pelo Usuario.
+Aplicação que cria figurinhas dinâmicas a partir das informações da API (incluindo uma própria) desejada pelo Usuario. 
 
 ![App Screenshot](https://pbs.twimg.com/media/FszklfJXwBEYy7d?format=jpg&name=4096x4096)
 
