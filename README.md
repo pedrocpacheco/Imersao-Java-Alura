@@ -5,6 +5,7 @@ Aplicação que cria figurinhas dinâmicas a partir das informações importadas
 ![App Screenshot](https://pbs.twimg.com/media/FszklfJXwBEYy7d?format=jpg&name=4096x4096)
 
 (Para rodar o projeto, acesse a pasta "modelo" e de run na Classe "App.java")
+
 Link da API desenvolvida por mim: https://api-twd-characters-production.up.railway.app/characters
 
 ## Escolhendo de Qual API Importar Dados
